@@ -4,7 +4,8 @@
   "description": "The infamous mastermind game in React",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",

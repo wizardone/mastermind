@@ -1,2 +1,5 @@
+import Board from './components/board.js';
 import React from 'react';
-//let react = require('react');
+import ReactDom from 'react-dom';
+
+ReactDom.render(<Board />, document.getElementById('mastermind'));
