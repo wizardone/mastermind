@@ -4,7 +4,11 @@ import Combination from './combination.js'
 export default class Board extends Component {
   constructor(){
     super();
-    this.state = { turns: 8 };
+    this.state = {
+      turns: 8,
+      selectedPeg: null,
+      gameOver: false
+    };
   }
 
   render(){
