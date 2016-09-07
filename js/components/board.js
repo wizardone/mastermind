@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Combination from './combination.js'
 
 export default class Board extends Component {
   constructor(){
@@ -16,8 +17,8 @@ export default class Board extends Component {
           return <div className='guess' key={key}>Guess {key} here</div>
         })
       }
-      <div className='combination'>Combination here</div>
-    </div>
+        <Combination />
+      </div>
     )
   }
 }
