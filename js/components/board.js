@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Combination from './combination.js'
+import Guess from './guess.js'
 
 export default class Board extends Component {
   constructor(){
@@ -18,7 +19,7 @@ export default class Board extends Component {
       <div className='mastermind-board'>
       {
         [...Array(turnsCount).keys()].map((key) => {
-          return <div className='guess' key={key}>Guess {key} here</div>
+          return <Guess key={key}/>
         })
       }
         <Combination />

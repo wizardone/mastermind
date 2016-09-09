@@ -10,13 +10,13 @@ export default class Combination extends React.Component {
     }
   }
 
-  generateColorPeg(){
+  generateColorPeg(index){
     let colors = this.state.freeColors;
     let color = colors[Math.floor(Math.random() * colors.length)];
     this.state.usedColors.push(color);
 
     return (
-      <ColorPeg color={color}/>
+      <ColorPeg key={index} color={color}/>
     )
   }
 
@@ -26,10 +26,10 @@ export default class Combination extends React.Component {
 
     return(
       <div className='combination'>
-        {this.generateColorPeg()}
-        {this.generateColorPeg()}
-        {this.generateColorPeg()}
-        {this.generateColorPeg()}
+      {[...Array(4).keys()].map((i) => {
+          return this.generateColorPeg(i);
+        })
+        }
       </div>
     )
   }
