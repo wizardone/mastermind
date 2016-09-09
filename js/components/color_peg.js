@@ -6,9 +6,9 @@ export default class ColorPeg extends React.Component {
     this.state = {selected: false};
   }
 
-  onClick = (e) => {
-    this.state.selected = true;
-  }
+  //onClick = (e) => {
+  //  this.state.selected = true;
+  //}
 
   render(){
     let color = this.props.color;
@@ -23,7 +23,7 @@ export default class ColorPeg extends React.Component {
     }
 
     return (
-      <div className='color-peg' color={color} style={style} onClick={this.onClick}></div>
+      <div className='color-peg' color={color} style={style} onClick={this.props.onClick}></div>
     )
   }
 }

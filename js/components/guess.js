@@ -10,7 +10,7 @@ export default class Guess extends React.Component {
   generateColorPeg(index){
     let color = 'white';
     return (
-      <ColorPeg key={index} color={color} guess={true}/>
+      <ColorPeg key={index} color={color} guess={true} onClick={this.props.onClick}/>
     )
   }
 
