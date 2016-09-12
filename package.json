@@ -6,7 +6,8 @@
   "scripts": {
     "test": "./node_modules/.bin/eslint js/",
     "build": "webpack",
-    "start": "webpack-dev-server --inline --hot"
+    "start": "webpack-dev-server --inline --hot",
+    "test": "./node_modules/.bin/eslint js/"
   },
   "repository": {
     "type": "git",
@@ -37,7 +38,6 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.13.0",
     "eslint": "^3.5.0",
-    "eslint-config-standard": "^6.0.0",
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-react": "^6.2.0",
     "eslint-plugin-standard": "^2.0.0",
