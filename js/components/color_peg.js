@@ -1,13 +1,13 @@
-import React from 'react';
+import React from 'react'
 
 export default class ColorPeg extends React.Component {
-  constructor(){
-    super();
-    this.state = {};
+  constructor () {
+    super()
+    this.state = {}
   }
 
-  render(){
-    let color = this.props.color;
+  render () {
+    let color = this.props.color
     let style = {
       width: '40px',
       backgroundColor: color,
