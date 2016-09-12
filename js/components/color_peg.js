@@ -3,12 +3,8 @@ import React from 'react';
 export default class ColorPeg extends React.Component {
   constructor(){
     super();
-    this.state = {selected: false};
+    this.state = {};
   }
-
-  //onClick = (e) => {
-  //  this.state.selected = true;
-  //}
 
   render(){
     let color = this.props.color;

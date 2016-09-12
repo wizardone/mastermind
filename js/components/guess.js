@@ -8,15 +8,18 @@ export default class Guess extends React.Component {
   }
 
   generateColorPeg(index){
-    let color = 'white';
+    const color = 'white';
+
     return (
       <ColorPeg key={index} color={color} guess={true} onClick={this.props.onClick}/>
     )
   }
 
   render(){
+    let turn = `guess-${this.props.className}`;
+
     return(
-      <div className='guess'>
+      <div className={turn}>
         {[...Array(4).keys()].map((i) => {
           return this.generateColorPeg(i);
         })

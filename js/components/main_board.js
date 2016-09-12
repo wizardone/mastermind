@@ -9,12 +9,19 @@ export default class MainBoard extends Component {
     this.state = {
       turns: 8,
       selectedPeg: null,
+      currentTurn: 0,
       gameOver: false
     };
   }
 
   onDrawBoardClick = (e) => {
     this.state.selectedPeg = e.target.getAttribute('color');
+  }
+
+  onGuessPegClick = (e) => {
+    let peg = e.target;
+    peg.setAttribute('color', this.state.selectedPeg);
+    peg.style.backgroundColor = this.state.selectedPeg;
   }
 
   render(){
@@ -30,7 +37,7 @@ export default class MainBoard extends Component {
           <div className='guess-board'>
             {
               [...Array(turnsCount).keys()].map((key) => {
-                return <Guess key={key} onClick={this.onClick}/>
+                return <Guess key={key} className={key} onClick={this.onGuessPegClick}/>
               })
             }
           </div>
