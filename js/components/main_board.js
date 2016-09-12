@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import DrawBoard from './draw_board.js';
-import Combination from './combination.js';
+import React, {Component} from 'react'
+import DrawBoard from './draw_board.js'
+import Combination from './combination.js'
 import Guess from './guess.js';
 
 export default class MainBoard extends Component {
-  constructor(){
+  constructor( ){
     super();
     this.state = {
       turns: 8,
@@ -20,11 +20,13 @@ export default class MainBoard extends Component {
 
   onGuessPegClick = (e) => {
     let peg = e.target;
-    peg.setAttribute('color', this.state.selectedPeg);
-    peg.style.backgroundColor = this.state.selectedPeg;
+    if(peg.parentElement.className == `guess-${this.state.currentTurn}`){
+      peg.setAttribute('color', this.state.selectedPeg);
+      peg.style.backgroundColor = this.state.selectedPeg;
+    }
   }
 
-  render(){
+  render() {
     let turnsCount = this.state.turns;
     let masterMindStyle = {
       float: 'left',
@@ -33,19 +35,19 @@ export default class MainBoard extends Component {
 
     return (
       <div>
-        <div className='mastermind-board' style={masterMindStyle}>
-          <div className='guess-board'>
-            {
-              [...Array(turnsCount).keys()].map((key) => {
-                return <Guess key={key} className={key} onClick={this.onGuessPegClick}/>
-              })
-            }
-          </div>
-          <Combination />
-        </div>
-        <div className='draw-board'>
-          <DrawBoard onClick={this.onDrawBoardClick}/>
-        </div>
+      <div className='mastermind-board' style={masterMindStyle}>
+      <div className='guess-board'>
+      {
+        [...Array(turnsCount).keys()].map((key) => {
+          return <Guess key={key} className={key} onClick={this.onGuessPegClick}/>
+        })
+      }
+      </div>
+      <Combination />
+      </div>
+      <div className='draw-board'>
+      <DrawBoard onClick={this.onDrawBoardClick}/>
+      </div>
       </div>
     )
   }
