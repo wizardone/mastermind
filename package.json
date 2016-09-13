@@ -1,13 +1,12 @@
 {
   "name": "mastermind",
   "version": "1.0.0",
-  "description": "The infamous mastermind game in React",
+  "description": "The infamous mastermind game in React and Redux",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/eslint js/",
     "build": "webpack",
-    "start": "webpack-dev-server --inline --hot",
-    "test": "./node_modules/.bin/eslint js/"
+    "start": "webpack-dev-server --inline --hot"
   },
   "repository": {
     "type": "git",
@@ -27,7 +26,8 @@
   },
   "homepage": "https://github.com/wizardone/mastermind#readme",
   "dependencies": {
-    "react": "^15.3.1"
+    "react": "^15.3.1",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "babel": "^6.5.2",
@@ -42,6 +42,8 @@
     "eslint-plugin-react": "^6.2.0",
     "eslint-plugin-standard": "^2.0.0",
     "react-dom": "^15.3.1",
+    "react-redux": "^4.4.5",
+    "redux-devtools": "^3.3.1",
     "webpack": "^1.13.2"
   }
 }
