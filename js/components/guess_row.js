@@ -1,7 +1,7 @@
 import React from 'react';
 import ColorPeg from './color_peg.js'
 
-export default class Guess extends React.Component {
+export default class GuessRow extends React.Component {
   constructor(){
     super();
     this.state = {};

@@ -1,6 +1,14 @@
-import MainBoard from './components/main_board.js';
-import React from 'react';
-import ReactDom from 'react-dom';
-//import mastermind from './redux/reducer.js'
+import MainBoard from './components/main_board.js'
+import React from 'react'
+import ReactDom from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import { mastermind, initialState } from './redux/reducer.js'
 
-ReactDom.render(<MainBoard />, document.getElementById('mastermind'));
+const store = createStore(mastermind, initialState, window.devToolsExtension && window.devToolsExtension())
+
+ReactDom.render(
+  <Provider store={store}>
+    <MainBoard />
+  </Provider>, document.getElementById('mastermind')
+);

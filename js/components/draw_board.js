@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import ColorPeg from './color_peg.js'
+import { connect } from 'react-redux'
+import { updateSelectedPeg } from '../redux/actions.js'
+import { bindActionCreators } from 'redux'
 
-export default class MainBoard extends Component {
+class DrawBoard extends Component {
   constructor(){
     super();
     this.state = {};
-  }
-
-  onClick = (e) => {
-    console.log(e.target)
   }
 
   render(){
@@ -16,18 +15,31 @@ export default class MainBoard extends Component {
     let drawPegStyle = {
       display: 'block'
     }
+    let { onDrawBoardClick } = this.props
 
     return (
       <div className='draw-board'>
-        <ColorPeg color='red' onClick={this.props.onClick}/><br /><br /><br />
-        <ColorPeg color='blue' onClick={this.props.onClick}/><br /><br /><br />
-        <ColorPeg color='green' onClick={this.props.onClick}/><br /><br /><br />
-        <ColorPeg color='yellow' onClick={this.props.onClick}/><br /><br /><br />
-        <ColorPeg color='pink' onClick={this.props.onClick}/><br /><br /><br />
-        <ColorPeg color='gray' onClick={this.props.onClick}/>
+        <ColorPeg color='red' guess={false} onClick={(e) => onDrawBoardClick(e)}/><br /><br /><br />
+        <ColorPeg color='blue' guess={false} onClick={(e) => onDrawBoardClick(e)}/><br /><br /><br />
+        <ColorPeg color='green' guess={false} onClick={(e) => onDrawBoardClick(e)}/><br /><br /><br />
+        <ColorPeg color='yellow' guess={false} onClick={(e) => onDrawBoardClick(e)} /><br /><br /><br />
+        <ColorPeg color='pink' guess={false} onClick={(e) => onDrawBoardClick(e)}/><br /><br /><br />
+        <ColorPeg color='gray' guess={false} onClick={(e) => onDrawBoardClick(e)}/>
       </div>
     )
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    state: state
+  }
+}
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onDrawBoardClick: (e) => dispatch(updateSelectedPeg(e.target.getAttribute('color')))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DrawBoard)

@@ -16,7 +16,7 @@ export default class Combination extends React.Component {
     this.state.usedColors.push(color);
 
     return (
-      <ColorPeg key={index} color={color}/>
+      <ColorPeg key={index} color={color} guess={false}/>
     )
   }
 

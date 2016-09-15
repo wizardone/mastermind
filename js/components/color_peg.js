@@ -19,7 +19,7 @@ export default class ColorPeg extends React.Component {
     }
 
     return (
-      <div className='color-peg' color={color} style={style} onClick={this.props.onClick}></div>
+      <div className='color-peg' style={style} color={color} onClick={this.props.onClick}></div>
     )
   }
 }

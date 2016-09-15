@@ -1,9 +1,11 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import DrawBoard from './draw_board.js'
 import Combination from './combination.js'
-import Guess from './guess.js';
+import GuessRow from './guess_row.js'
+import { updateCurrentTurn } from '../redux/actions.js'
+import { connect } from 'react-redux'
 
-export default class MainBoard extends Component {
+class MainBoard extends Component {
   constructor( ){
     super();
     this.state = {
@@ -14,42 +16,44 @@ export default class MainBoard extends Component {
     };
   }
 
-  onDrawBoardClick = (e) => {
-    this.state.selectedPeg = e.target.getAttribute('color');
-  }
-
-  onGuessPegClick = (e) => {
-    let peg = e.target;
-    if(peg.parentElement.className == `guess-${this.state.currentTurn}`){
-      peg.setAttribute('color', this.state.selectedPeg);
-      peg.style.backgroundColor = this.state.selectedPeg;
-    }
-  }
-
   render() {
     let turnsCount = this.state.turns;
     let masterMindStyle = {
       float: 'left',
       marginRight: '20%'
     }
+    let { currentTurn, onClick } = this.props;
 
     return (
       <div>
-      <div className='mastermind-board' style={masterMindStyle}>
-      <div className='guess-board'>
-      {
-        [...Array(turnsCount).keys()].map((key) => {
-          return <Guess key={key} className={key} onClick={this.onGuessPegClick}/>
-        })
-      }
-      </div>
-      <Combination />
-      </div>
-      <div className='draw-board'>
-      <DrawBoard onClick={this.onDrawBoardClick}/>
-      </div>
+        <div className='mastermind-board' style={masterMindStyle}>
+          <div className='guess-board'>
+          {
+            [...Array(turnsCount).keys()].map((key) => {
+              return <GuessRow key={key} className={key} />
+            })
+          }
+          </div>
+        <Combination />
+        </div>
+        <div className='draw-board'>
+          <DrawBoard />
+        </div>
       </div>
     )
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    state: state
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onClick: () => dispatch(updateCurrentTurn(6))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainBoard)
