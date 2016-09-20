@@ -22,7 +22,7 @@ class MainBoard extends Component {
       float: 'left',
       marginRight: '20%'
     }
-    let { currentTurn, onClick } = this.props;
+    let { onEndTurnClick } = this.props;
 
     return (
       <div>
@@ -52,7 +52,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onClick: () => dispatch(updateCurrentTurn(6))
+    onEndTurnClick: () => dispatch(updateCurrentTurn(6))
   }
 }
 

@@ -1,27 +1,30 @@
-import React from 'react';
+import React from 'react'
 import ColorPeg from './color_peg.js'
+import { connect } from 'react-redux'
 
-export default class GuessRow extends React.Component {
-  constructor(){
-    super();
-    this.state = {};
+class GuessRow extends React.Component {
+  constructor () {
+    super()
+    this.state = {}
   }
 
-  generateColorPeg(index){
-    const color = 'white';
+  fillGuessPeg = (e, color) => {
+    if (color != undefined) {
+      e.target.style.backgroundColor = color
+    }
+  }
+
+  render () {
+    const color = 'white'
+    let turn = `guess-${this.props.className}`
+    let { selectedColor } = this.props
 
     return (
-      <ColorPeg key={index} color={color} guess={true} onClick={this.props.onClick}/>
-    )
-  }
-
-  render(){
-    let turn = `guess-${this.props.className}`;
-
-    return(
       <div className={turn}>
         {[...Array(4).keys()].map((i) => {
-          return this.generateColorPeg(i);
+          return (
+            <ColorPeg key={i} color={color} guess={true} onClick={(e) => this.fillGuessPeg(e, selectedColor)}/>
+          )
         })
         }
         <br /><br /><br />
@@ -29,3 +32,11 @@ export default class GuessRow extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    selectedColor: state.selectedPeg
+  }
+}
+
+export default connect(mapStateToProps)(GuessRow)
