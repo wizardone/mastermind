@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import DrawBoard from './draw_board.js'
 import Combination from './combination.js'
 import GuessRow from './guess_row.js'
-import { updateCurrentTurn } from '../redux/actions.js'
 import { connect } from 'react-redux'
 
 class MainBoard extends Component {

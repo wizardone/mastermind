@@ -1,6 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { updateSelectedPeg } from '../redux/actions.js'
 
-export default class ColorPeg extends React.Component {
+class ColorPeg extends React.Component {
   constructor () {
     super()
     this.state = {}
@@ -17,9 +19,24 @@ export default class ColorPeg extends React.Component {
       float: 'left',
       padding: '5px'
     }
+    let { index, onPegClick } = this.props
 
     return (
-      <div className='color-peg' style={style} color={color} onClick={this.props.onClick}></div>
+      <div className='`color-peg-${index}`' style={style} color={color} onClick={(e) => onPegClick(e)}></div>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {}
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    onPegClick: (e) => {
+      dispatch(updateSelectedPeg(e.target.getAttribute('color')))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ColorPeg)

@@ -1,5 +1,5 @@
 import React from 'react'
-import ColorPeg from './color_peg.js'
+import WhitePeg from './white_peg.js'
 import { connect } from 'react-redux'
 import { updateCurrentTurn } from '../redux/actions.js'
 
@@ -7,13 +7,6 @@ class GuessRow extends React.Component {
   constructor (props) {
     super(props)
     this.state = {}
-  }
-
-  fillGuessPeg = (e, color, turn) => {
-    let parentClass = e.target.parentElement.className
-    if (color != undefined && parentClass == `guess-${turn}`) {
-      e.target.style.backgroundColor = color
-    }
   }
 
   render () {
@@ -26,7 +19,7 @@ class GuessRow extends React.Component {
       <div className={turnClass}>
         {[...Array(4).keys()].map((i) => {
           return (
-            <ColorPeg key={i} color={color} onClick={(e) => this.fillGuessPeg(e, selectedColor, currentTurn)}/>
+            <WhitePeg key={i} index={i} color={color}/>
           )
         })
         }
@@ -40,14 +33,15 @@ class GuessRow extends React.Component {
 const mapStateToProps = (state) => {
   return {
     selectedColor: state.selectedPeg,
-    currentTurn: state.currentTurn
+    currentTurn: state.currentTurn,
+    winningCombo: state.winningCombination
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onCheckCombinationClick: () => {
-      let newTurn = ownProps.currentTurn+1
+      let newTurn = ownProps.currentTurn + 1
       dispatch(updateCurrentTurn(newTurn))
     }
   }
