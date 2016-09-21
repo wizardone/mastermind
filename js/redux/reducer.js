@@ -1,8 +1,10 @@
 let setWinningCombination = () => {
-  let winningCombination = [];
+  let winningCombination = []
+  let freeColors = ['red', 'blue', 'yellow', 'green', 'pink', 'gray'];
   [...Array(4).keys()].map((i) => {
-    let freeColors = ['red', 'blue', 'yellow', 'green', 'pink', 'gray']
-    let color = freeColors[Math.floor(Math.random() * freeColors.length)]
+    let index = Math.floor(Math.random() * freeColors.length)
+    let color = freeColors[index]
+    freeColors.splice(index, 1)
     winningCombination.push(color)
   })
   return winningCombination

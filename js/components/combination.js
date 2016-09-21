@@ -1,36 +1,21 @@
-import React from 'react';
+import React from 'react'
 import ColorPeg from './color_peg.js'
+import { connect } from 'react-redux'
 
-export default class Combination extends React.Component {
-  constructor(){
-    super();
-    this.state = {
-      freeColors: ['red', 'blue', 'yellow', 'green', 'pink', 'gray'],
-      usedColors: []
+const Combination = ( { winningColors } ) => (
+  <div className='combination'>
+    {
+      [...winningColors.keys()].map((i) => {
+        return <ColorPeg key={i} color={winningColors[i]}/>
+      })
     }
-  }
+  </div>
+)
 
-  generateColorPeg(index){
-    let colors = this.state.freeColors;
-    let color = colors[Math.floor(Math.random() * colors.length)];
-    this.state.usedColors.push(color);
-
-    return (
-      <ColorPeg key={index} color={color} guess={false}/>
-    )
-  }
-
-
-  render(){
-    let colors = this.state.freeColors;
-
-    return(
-      <div className='combination'>
-      {[...Array(4).keys()].map((i) => {
-          return this.generateColorPeg(i);
-        })
-        }
-      </div>
-    )
+const mapStateToProps = (state) => {
+  return {
+    winningColors: state.winningCombination
   }
 }
+
+export default connect(mapStateToProps)(Combination)
