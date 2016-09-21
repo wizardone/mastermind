@@ -22,7 +22,7 @@ class MainBoard extends Component {
       float: 'left',
       marginRight: '20%'
     }
-    let { onEndTurnClick } = this.props;
+    let { currentTurn } = this.props;
 
     return (
       <div>
@@ -30,7 +30,7 @@ class MainBoard extends Component {
           <div className='guess-board'>
           {
             [...Array(turnsCount).keys()].map((key) => {
-              return <GuessRow key={key} className={key} />
+              return <GuessRow key={key} className={key} currentTurn={currentTurn} />
             })
           }
           </div>
@@ -46,14 +46,8 @@ class MainBoard extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    state: state
+    currentTurn: state.currentTurn
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onEndTurnClick: () => dispatch(updateCurrentTurn(6))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MainBoard)
+export default connect(mapStateToProps)(MainBoard)
