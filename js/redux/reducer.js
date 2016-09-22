@@ -32,6 +32,10 @@ export let mastermind = (state, action) => {
       return Object.assign({}, state, {
         selectedPeg: action.selectedPeg
       })
+    case 'UPDATE_CURRENT_COMBINATION':
+      return Object.assign({}, state, {
+        currentTurnCombination: action.currentTurnCombination
+      })
     default:
       return state
   }

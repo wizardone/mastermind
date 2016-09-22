@@ -5,13 +5,14 @@ import { updateSelectedPeg } from '../redux/actions.js'
 class WhitePeg extends React.Component {
   constructor () {
     super()
-    this.state = {}
+    this.state = { color: 'white' }
   }
 
   fillGuessPeg = (e, color, turn) => {
     let parentClass = e.target.parentElement.className
     if (color != undefined && parentClass == `guess-${turn}`) {
       e.target.style.backgroundColor = color
+      this.setState({ color: color })
     }
     let pegs = document.getElementsByClassName(parentClass)[0].childNodes
   }
@@ -27,10 +28,10 @@ class WhitePeg extends React.Component {
       padding: '5px'
     }
     let { index, selectedColor, currentTurn } = this.props
-    let color = 'white'
+    let { color } = this.state
 
     return (
-      <div className='`white-peg-${index}`' style={style} color={color} onClick={(e) => this.fillGuessPeg(e, selectedColor, currentTurn)}></div>
+      <div className={`white-peg-${index}`} style={style} color={color} onClick={(e) => this.fillGuessPeg(e, selectedColor, currentTurn)}></div>
     )
   }
 }
@@ -43,12 +44,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    onCheckCombinationClick: () => {
-      let newTurn = ownProps.currentTurn + 1
-      dispatch(updateCurrentTurn(newTurn))
-    }
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(WhitePeg)
+export default connect(mapStateToProps)(WhitePeg)

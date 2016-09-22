@@ -11,3 +11,10 @@ export let updateSelectedPeg = (target) => {
     selectedPeg: target
   }
 }
+
+export let updateCurrentTurnCombination = (combo) => {
+  return {
+    type: 'UPDATE_CURRENT_COMBINATION',
+    currentTurnCombination: combo
+  }
+}

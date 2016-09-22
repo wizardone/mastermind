@@ -1,7 +1,7 @@
 import React from 'react'
 import WhitePeg from './white_peg.js'
 import { connect } from 'react-redux'
-import { updateCurrentTurn } from '../redux/actions.js'
+import { updateCurrentTurn, updateCurrentTurnCombination } from '../redux/actions.js'
 
 class GuessRow extends React.Component {
   constructor (props) {
@@ -19,11 +19,11 @@ class GuessRow extends React.Component {
       <div className={turnClass}>
         {[...Array(4).keys()].map((i) => {
           return (
-            <WhitePeg key={i} index={i} color={color}/>
+            <WhitePeg key={i} index={i}/>
           )
         })
         }
-        <button className={buttonClass} onClick={onCheckCombinationClick}>Check combination</button>
+        <button className={buttonClass} onClick={(e) => onCheckCombinationClick(e)}>Check combination</button>
         <br /><br /><br />
       </div>
     )
@@ -40,9 +40,21 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onCheckCombinationClick: () => {
+    onCheckCombinationClick: (e) => {
       let newTurn = ownProps.currentTurn + 1
-      dispatch(updateCurrentTurn(newTurn))
+      let parentClass = e.target.parentElement.className
+      let pegs = document.getElementsByClassName(parentClass)[0].childNodes
+      let colors = []
+      for (let peg of pegs) {
+        if (peg.tagName == 'DIV') {
+          colors.push(peg.getAttribute('color'))
+        }
+      }
+      // Do not dispatch actions simultaneously, this causes problems
+      dispatch(updateCurrentTurnCombination(colors))
+      setTimeout(() => {
+        dispatch(updateCurrentTurn(newTurn))
+      }, 100)
     }
   }
 }
