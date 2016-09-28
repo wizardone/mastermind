@@ -11,9 +11,9 @@ class GuessRow extends React.Component {
 
   render () {
     const color = 'white'
-    let turnClass = `guess-${this.props.className}`
-    let buttonClass = `button-${this.props.className}`
-    let { selectedColor, currentTurn, onCheckCombinationClick } = this.props
+    let turnClass = `guess-${this.props.index}`
+    let buttonClass = `button-${this.props.index}`
+    let { selectedColor, index, onCheckCombinationClick } = this.props
 
     return (
       <div className={turnClass}>
@@ -39,19 +39,22 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+  let fetchSelectedColors = (target) => {
+    let parentClass = target.parentElement.className
+    let pegs = document.getElementsByClassName(parentClass)[0].childNodes
+    let colors = []
+    for (let peg of pegs) {
+      if (peg.tagName == 'DIV') {
+        colors.push(peg.getAttribute('color'))
+      }
+    }
+    return colors
+  }
+
   return {
     onCheckCombinationClick: (e) => {
-      let newTurn = ownProps.currentTurn + 1
-      let parentClass = e.target.parentElement.className
-      let pegs = document.getElementsByClassName(parentClass)[0].childNodes
-      let colors = []
-      for (let peg of pegs) {
-        if (peg.tagName == 'DIV') {
-          colors.push(peg.getAttribute('color'))
-        }
-      }
-      // Do not dispatch actions simultaneously, this causes problems
-      dispatch(updateCurrentTurnCombination(colors))
+      let newTurn = ownProps.index + 1
+      dispatch(updateCurrentTurnCombination(fetchSelectedColors(e.target)))
       setTimeout(() => {
         dispatch(updateCurrentTurn(newTurn))
       }, 100)

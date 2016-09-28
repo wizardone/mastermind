@@ -18,7 +18,7 @@ export const initialState = {
   winningCombination: setWinningCombination()
 }
 
-export let mastermind = (state, action) => {
+export let mastermind = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_WINNING_COMBINATION':
       return Object.assign({}, state, {

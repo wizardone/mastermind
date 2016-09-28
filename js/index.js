@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { mastermind, initialState } from './redux/reducer.js'
 
-const store = createStore(mastermind, initialState, window.devToolsExtension && window.devToolsExtension())
+const store = createStore(mastermind, window.devToolsExtension && window.devToolsExtension())
 
 ReactDom.render(
   <Provider store={store}>

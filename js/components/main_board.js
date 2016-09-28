@@ -8,10 +8,7 @@ class MainBoard extends Component {
   constructor( ){
     super();
     this.state = {
-      turns: 8,
-      selectedPeg: null,
-      currentTurn: 0,
-      gameOver: false
+      turns: 8
     };
   }
 
@@ -29,7 +26,7 @@ class MainBoard extends Component {
           <div className='guess-board'>
           {
             [...Array(turnsCount).keys()].map((key) => {
-              return <GuessRow key={key} className={key} currentTurn={currentTurn} />
+              return <GuessRow key={key} index={key} />
             })
           }
           </div>
