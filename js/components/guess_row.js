@@ -13,7 +13,7 @@ class GuessRow extends React.Component {
     const color = 'white'
     let turnClass = `guess-${this.props.index}`
     let buttonClass = `button-${this.props.index}`
-    let { selectedColor, index, onCheckCombinationClick } = this.props
+    let { selectedColor, index, onCheckCombinationClick, winningCombo } = this.props
 
     return (
       <div className={turnClass}>
@@ -23,7 +23,7 @@ class GuessRow extends React.Component {
           )
         })
         }
-        <button className={buttonClass} onClick={(e) => onCheckCombinationClick(e)}>Check combination</button>
+        <button className={buttonClass} onClick={(e) => onCheckCombinationClick(e, winningCombo)}>Check combination</button>
         <br /><br /><br />
       </div>
     )
@@ -39,22 +39,39 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+
   let fetchSelectedColors = (target) => {
     let parentClass = target.parentElement.className
     let pegs = document.getElementsByClassName(parentClass)[0].childNodes
-    let colors = []
+    let selectedColors = []
     for (let peg of pegs) {
       if (peg.tagName == 'DIV') {
-        colors.push(peg.getAttribute('color'))
+        selectedColors.push(peg.getAttribute('color'))
       }
     }
-    return colors
+    return selectedColors
+  }
+
+  let compareColors = (selectedColors, winningColors) => {
+    let cows = []
+    let bulls = []
+    selectedColors.forEach((el, index) => {
+      if (winningColors.indexOf(el) == index) {
+        bulls.push(el)
+      } else if (winningColors.indexOf(el) >= 0) {
+        cows.push(el)
+      }
+    })
   }
 
   return {
-    onCheckCombinationClick: (e) => {
+    onCheckCombinationClick: (e, winningColors) => {
       let newTurn = ownProps.index + 1
-      dispatch(updateCurrentTurnCombination(fetchSelectedColors(e.target)))
+      let selectedColors = fetchSelectedColors(e.target)
+
+      compareColors(selectedColors, winningColors)
+
+      dispatch(updateCurrentTurnCombination(selectedColors))
       setTimeout(() => {
         dispatch(updateCurrentTurn(newTurn))
       }, 100)
