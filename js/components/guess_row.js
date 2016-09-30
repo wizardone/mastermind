@@ -2,6 +2,7 @@ import React from 'react'
 import WhitePeg from './white_peg.js'
 import { connect } from 'react-redux'
 import { updateCurrentTurn, updateCurrentTurnCombination } from '../redux/actions.js'
+import { fetchSelectedColors, compareColors } from '../helpers.js'
 
 class GuessRow extends React.Component {
   constructor (props) {
@@ -39,31 +40,6 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-
-  let fetchSelectedColors = (target) => {
-    let parentClass = target.parentElement.className
-    let pegs = document.getElementsByClassName(parentClass)[0].childNodes
-    let selectedColors = []
-    for (let peg of pegs) {
-      if (peg.tagName == 'DIV') {
-        selectedColors.push(peg.getAttribute('color'))
-      }
-    }
-    return selectedColors
-  }
-
-  let compareColors = (selectedColors, winningColors) => {
-    let cows = []
-    let bulls = []
-    selectedColors.forEach((el, index) => {
-      if (winningColors.indexOf(el) == index) {
-        bulls.push(el)
-      } else if (winningColors.indexOf(el) >= 0) {
-        cows.push(el)
-      }
-    })
-  }
-
   return {
     onCheckCombinationClick: (e, winningColors) => {
       let newTurn = ownProps.index + 1
