@@ -58,6 +58,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       setTimeout(() => {
         dispatch(updateCurrentTurn(newTurn))
       }, 100)
+      e.target.remove()
     }
   }
 }
