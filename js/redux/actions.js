@@ -19,6 +19,13 @@ export let updateCurrentTurnCombination = (combo) => {
   }
 }
 
+export let updateCurrentTurnHits = (hits) => {
+  return {
+    type: 'UPDATE_CURRENT_TURN_HITS',
+    currentTurnHits: hits
+  }
+}
+
 export let gameOver = (win = true) => {
   return {
     type: 'GAME_OVER',

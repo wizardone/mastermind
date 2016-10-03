@@ -14,6 +14,7 @@ export const initialState = {
   totalTurns: 8,
   currentTurn: 0,
   currentTurnCombination: null,
+  currentTurnHits: {},
   selectedPeg: null,
   gameOver: false,
   winningCombination: setWinningCombination()
@@ -36,6 +37,10 @@ export let mastermind = (state = initialState, action) => {
     case 'UPDATE_CURRENT_COMBINATION':
       return Object.assign({}, state, {
         currentTurnCombination: action.currentTurnCombination
+      })
+    case 'UPDATE_CURRENT_TURN_HITS':
+      return Object.assign({}, state, {
+        currentTurnHits: action.currentTurnHits
       })
     case 'GAME_OVER':
       return Object.assign({}, state, {
