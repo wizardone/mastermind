@@ -1,7 +1,7 @@
 import React from 'react'
 import WhitePeg from './white_peg.js'
 import { connect } from 'react-redux'
-import { updateCurrentTurn, updateCurrentTurnCombination } from '../redux/actions.js'
+import { updateCurrentTurn, updateCurrentTurnCombination, gameOver } from '../redux/actions.js'
 import { fetchSelectedColors, compareColors } from '../helpers.js'
 
 class GuessRow extends React.Component {
@@ -45,13 +45,17 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       let newTurn = ownProps.index + 1
       let selectedColors = fetchSelectedColors(e.target)
 
-      compareColors(selectedColors, winningColors)
+      let hits = compareColors(selectedColors, winningColors)
 
-      dispatch(updateCurrentTurnCombination(selectedColors))
-      setTimeout(() => {
-        dispatch(updateCurrentTurn(newTurn))
-      }, 100)
-      e.target.remove()
+      if (hits['bulls'] == 4) {
+        dispatch(gameOver(true))
+      } else {
+        dispatch(updateCurrentTurnCombination(selectedColors))
+          setTimeout(() => {
+            dispatch(updateCurrentTurn(newTurn))
+          }, 100)
+        e.target.remove()
+      }
     }
   }
 }

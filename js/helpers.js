@@ -20,4 +20,9 @@ export let compareColors = (selectedColors, winningColors) => {
       cows.push(el)
     }
   })
+
+  return {
+    'cows': cows.length,
+    'bulls': bulls.length
+  }
 }

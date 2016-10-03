@@ -18,11 +18,11 @@ class MainBoard extends Component {
       float: 'left',
       marginRight: '20%'
     }
-    let { currentTurn } = this.props;
+    let { currentTurn, gameOver } = this.props;
 
     return (
       <div>
-        <div className='mastermind-board' style={masterMindStyle}>
+      <div className='mastermind-board' style={masterMindStyle}>
           <div className='guess-board'>
           {
             [...Array(turnsCount).keys()].map((key) => {
@@ -30,7 +30,7 @@ class MainBoard extends Component {
             })
           }
           </div>
-        <Combination />
+        <Combination hidden={gameOver}/>
         </div>
         <div className='draw-board'>
           <DrawBoard />
@@ -42,7 +42,8 @@ class MainBoard extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentTurn: state.currentTurn
+    currentTurn: state.currentTurn,
+    gameOver: state.gameOver
   }
 }
 

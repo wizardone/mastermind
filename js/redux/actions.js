@@ -18,3 +18,10 @@ export let updateCurrentTurnCombination = (combo) => {
     currentTurnCombination: combo
   }
 }
+
+export let gameOver = (win = true) => {
+  return {
+    type: 'GAME_OVER',
+    gameOver: true
+  }
+}
