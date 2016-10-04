@@ -1,6 +1,10 @@
+import React from 'react'
+import ReactDom from 'react-dom'
+import CodePeg from './components/code_peg.js'
+
 export let fetchSelectedColors = (target) => {
-  let parentClass = target.parentElement.className
-  let pegs = document.getElementsByClassName(parentClass)[0].childNodes
+  let parentId = target.parentElement.id
+  let pegs = document.getElementById(parentId).childNodes
   let selectedColors = []
   for (let peg of pegs) {
     if (peg.tagName == 'DIV') {
@@ -11,18 +15,21 @@ export let fetchSelectedColors = (target) => {
 }
 
 export let compareColors = (selectedColors, winningColors) => {
-  let cows = []
-  let bulls = []
+  let hits = []
   selectedColors.forEach((el, index) => {
     if (winningColors.indexOf(el) == index) {
-      bulls.push(el)
+      hits.push('bull')
     } else if (winningColors.indexOf(el) >= 0) {
-      cows.push(el)
+      hits.push('cow')
     }
   })
 
-  return {
-    'cows': cows.length,
-    'bulls': bulls.length
+  return hits
+}
+
+export let renderCodePegs = (hits, index) => {
+  for (let hit = 0; hit < hits.length; hit++) {
+    let elementToRender = document.getElementById(`guess-${index}`).getElementsByClassName(`combination-checker-${hit}`)[0]
+    ReactDom.render(<CodePeg hit={hits[hit]} key={hit}/>, elementToRender)
   }
 }

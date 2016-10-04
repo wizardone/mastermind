@@ -5,27 +5,25 @@ import GuessRow from './guess_row.js'
 import { connect } from 'react-redux'
 
 class MainBoard extends Component {
-  constructor( ){
-    super();
-    this.state = {
-      turns: 8
-    };
+  constructor () {
+    super()
+    this.state = {}
   }
 
-  render() {
-    let turnsCount = this.state.turns;
+  render () {
+    let turnsCount = this.state.turns
     let masterMindStyle = {
       float: 'left',
       marginRight: '20%'
     }
-    let { currentTurn, gameOver } = this.props;
+    let { currentTurn, gameOver, totalTurns } = this.props
 
     return (
       <div>
       <div className='mastermind-board' style={masterMindStyle}>
           <div className='guess-board'>
           {
-            [...Array(turnsCount).keys()].map((key) => {
+            [...Array(totalTurns).keys()].map((key) => {
               return <GuessRow key={key} index={key} />
             })
           }
@@ -43,7 +41,8 @@ class MainBoard extends Component {
 const mapStateToProps = (state) => {
   return {
     currentTurn: state.currentTurn,
-    gameOver: state.gameOver
+    gameOver: state.gameOver,
+    totalTurns: state.totalTurns
   }
 }
 

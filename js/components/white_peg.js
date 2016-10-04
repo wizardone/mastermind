@@ -9,12 +9,12 @@ class WhitePeg extends React.Component {
   }
 
   fillGuessPeg = (e, color, turn) => {
-    let parentClass = e.target.parentElement.className
-    if (color != undefined && parentClass == `guess-${turn}`) {
+    let id = e.target.parentElement.id
+    if (color != undefined && id == `guess-${turn}`) {
       e.target.style.backgroundColor = color
       this.setState({ color: color })
     }
-    let pegs = document.getElementsByClassName(parentClass)[0].childNodes
+    let pegs = document.getElementById(id).childNodes
   }
 
   render () {
@@ -31,7 +31,7 @@ class WhitePeg extends React.Component {
     let { color } = this.state
 
     return (
-      <div className={`white-peg-${index}`} style={style} color={color} onClick={(e) => this.fillGuessPeg(e, selectedColor, currentTurn)}></div>
+      <div style={style} color={color} onClick={(e) => this.fillGuessPeg(e, selectedColor, currentTurn)}></div>
     )
   }
 }

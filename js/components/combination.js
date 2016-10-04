@@ -2,7 +2,7 @@ import React from 'react'
 import ColorPeg from './color_peg.js'
 import { connect } from 'react-redux'
 
-const Combination = ( { winningColors, gameOver } ) => (
+const Combination = ({ winningColors, gameOver }) => (
   <div className='combination'>
     {
       [...winningColors.keys()].map((i) => {

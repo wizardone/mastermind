@@ -19,7 +19,7 @@ class ColorPeg extends React.Component {
       float: 'left',
       padding: '5px'
     }
-    let { index, onPegClick } = this.props
+    let { onPegClick } = this.props
 
     return (
       <div className='`color-peg-${index}`' style={style} color={color} onClick={(e) => onPegClick(e)}></div>
