@@ -23,7 +23,6 @@ export let compareColors = (selectedColors, winningColors) => {
       hits.push('cow')
     }
   })
-
   return hits
 }
 
@@ -32,4 +31,23 @@ export let renderCodePegs = (hits, index) => {
     let elementToRender = document.getElementById(`guess-${index}`).getElementsByClassName(`combination-checker-${hit}`)[0]
     ReactDom.render(<CodePeg hit={hits[hit]} key={hit}/>, elementToRender)
   }
+}
+
+export let shuffle = (array) => {
+  let currentIndex = array.length, temporaryValue, randomIndex
+  let newAr = []
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex)
+  	currentIndex --
+    let temp = array[currentIndex]
+    array[currentIndex] = array[randomIndex]
+    array[randomIndex] = temp
+  }
+  return array
+}
+
+export let isOnlyBulls = (array) => {
+  return array.every((el) => {
+    return el == 'bull'
+  })
 }

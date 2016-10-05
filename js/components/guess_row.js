@@ -4,7 +4,7 @@ import WhitePeg from './white_peg.js'
 import CodePeg from './code_peg.js'
 import { connect } from 'react-redux'
 import { updateCurrentTurn, updateCurrentTurnCombination, updateCurrentTurnHits, gameOver } from '../redux/actions.js'
-import { fetchSelectedColors, compareColors, renderCodePegs } from '../helpers.js'
+import * as helpers from '../helpers.js'
 
 class GuessRow extends React.Component {
   constructor (props) {
@@ -48,11 +48,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onCheckCombinationClick: (e, winningColors) => {
       // This method has grown too much, need to find a way to refactor it
+      // Also consider using middleware like redux thunk
       let newTurn = ownProps.index + 1
-      let selectedColors = fetchSelectedColors(e.target)
+      let selectedColors = helpers.fetchSelectedColors(e.target)
+      let hits = helpers.compareColors(selectedColors, winningColors)
 
-      let hits = compareColors(selectedColors, winningColors)
-      if (hits['bulls'] === 4) {
+      hits = helpers.shuffle(hits)
+      if (hits.length == 4 && helpers.isOnlyBulls(hits)) {
         dispatch(gameOver(true))
       } else {
         dispatch(updateCurrentTurnCombination(selectedColors))
@@ -63,7 +65,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
           dispatch(updateCurrentTurn(newTurn))
         }, 200)
         e.target.remove()
-        renderCodePegs(hits, ownProps.index)
+        helpers.renderCodePegs(hits, ownProps.index)
       }
     }
   }
