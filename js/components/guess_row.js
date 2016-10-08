@@ -13,8 +13,8 @@ class GuessRow extends React.Component {
   }
 
   render () {
-    let turnClass = `guess-${this.props.index}`
-    let buttonClass = `button-${this.props.index}`
+    const turnClass = `guess-${this.props.index}`
+    const buttonClass = `button-${this.props.index}`
     let { onCheckCombinationClick, winningCombo } = this.props
 
     return (

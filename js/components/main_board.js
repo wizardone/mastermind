@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import DrawBoard from './draw_board.js'
 import Combination from './combination.js'
 import GuessRow from './guess_row.js'
+import GameOver from './game_over.js'
 import { connect } from 'react-redux'
 
 class MainBoard extends Component {
@@ -11,28 +12,36 @@ class MainBoard extends Component {
   }
 
   render () {
-    let turnsCount = this.state.turns
-    let masterMindStyle = {
+    const masterMindStyle = {
       float: 'left',
-      marginRight: '20%'
+      marginRight: '10%'
     }
+
+    const mainStyle = {
+      margin: 'auto'
+    }
+
     let { currentTurn, gameOver, totalTurns } = this.props
 
     return (
-      <div>
-      <div className='mastermind-board' style={masterMindStyle}>
-          <div className='guess-board'>
-          {
-            [...Array(totalTurns).keys()].map((key) => {
-              return <GuessRow key={key} index={key} />
-            })
-          }
+      <div style={mainStyle}>
+      { gameOver === true ?
+        (<GameOver />) :
+        (<div>
+          <div className='mastermind-board' style={masterMindStyle}>
+            <div className='guess-board'>
+            {
+              [...Array(totalTurns).keys()].map((key) => {
+                return <GuessRow key={key} index={key} />
+              })
+            }
+            </div>
           </div>
-        <Combination hidden={gameOver}/>
-        </div>
-        <div className='draw-board'>
-          <DrawBoard />
-        </div>
+          <div className='draw-board'>
+            <DrawBoard />
+          </div>
+         </div>
+        )}
       </div>
     )
   }
