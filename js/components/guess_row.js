@@ -15,6 +15,11 @@ class GuessRow extends React.Component {
   render () {
     const turnClass = `guess-${this.props.index}`
     const buttonClass = `button-${this.props.index}`
+    const buttonStyle = {
+      width: '100px',
+      margin: 'auto',
+      float: 'none'
+    }
     let { onCheckCombinationClick, winningCombo } = this.props
 
     return (
@@ -25,7 +30,7 @@ class GuessRow extends React.Component {
           )
         })
         }
-          <button className={buttonClass} onClick={(e) => onCheckCombinationClick(e, winningCombo)}>Check combination</button>
+          <button style={buttonStyle} className={buttonClass} onClick={(e) => onCheckCombinationClick(e, winningCombo)}>Check</button>
           <div className='combination-checker-0'></div>
           <div className='combination-checker-1'></div>
           <div className='combination-checker-2'></div>
@@ -54,7 +59,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       let hits = helpers.compareColors(selectedColors, winningColors)
 
       hits = helpers.shuffle(hits)
-      if (hits.length == 4 && helpers.isOnlyBulls(hits)) {
+      if ((hits.length == 4 && helpers.isOnlyBulls(hits)) ||
+           newTurn == 8) {
         dispatch(gameOver(true))
       } else {
         dispatch(updateCurrentTurnCombination(selectedColors))
