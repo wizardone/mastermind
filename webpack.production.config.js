@@ -1,11 +1,11 @@
 const path = require('path')
 module.exports = {
   entry: './js/index.js',
-  devtool: 'eval',
+  devtool: 'source-map',
   output: {
-    path: path.join(__dirname, 'lib'),
+    path: path.join(__dirname, 'public'),
     filename: 'bundle.js',
-    publicPath: 'lib/'
+    publicPath: 'public/'
   },
   module: {
     loaders: [
@@ -17,3 +17,4 @@ module.exports = {
     ]
   }
 }
+
