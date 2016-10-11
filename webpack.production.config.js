@@ -1,4 +1,6 @@
 const path = require('path')
+const webpack = require('webpack')
+
 module.exports = {
   entry: './js/index.js',
   devtool: 'source-map',
@@ -7,6 +9,14 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: 'public/'
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production'),
+        'PORT': 8080
+      }
+    })
+  ],
   module: {
     loaders: [
       {

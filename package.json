@@ -8,7 +8,7 @@
     "test": "mocha --compilers js:babel-register",
     "build": "NODE_ENV=production webpack -p --config ./webpack.production.config.js --progress --profile --colors",
     "start-dev": "webpack-dev-server --inline --hot",
-    "start": "PORT=5000 node js/server.js"
+    "start": "node js/server.js"
   },
   "repository": {
     "type": "git",
